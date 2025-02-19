@@ -1,291 +1,315 @@
-<!doctype html>
-<html lang="en" data-bs-theme="auto">
-  <head><script src="assets/js/color-modes.js"></script>
+<?php
+/**
+ * CodeIgniter
+ *
+ * An open source application development framework for PHP
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	CodeIgniter
+ * @author	EllisLab Dev Team
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ * @since	Version 1.0.0
+ * @filesource
+ */
 
-    <meta charset="utf-8">
-	<link href="ppds.png" rel="icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.118.2">
-    <title>PONDOK PESANTREN DARUSSALAMAH</title>
-    <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-	<link href="assets/dist/css/all.min.css" rel="stylesheet">
+/*
+ *---------------------------------------------------------------
+ * APPLICATION ENVIRONMENT 
+ *---------------------------------------------------------------
+ *
+ * You can load different configurations depending on your
+ * current environment. Setting the environment also influences
+ * things like logging and error reporting.
+ *
+ * This can be set to anything, but default usage is:
+ *
+ *     development
+ *     testing
+ *     production
+ *
+ * NOTE: If you change these, also change the error_reporting() code below
+ */
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
-    
-    <!-- Custom styles for this template -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-        
-    <link href="carousel.css" rel="stylesheet">
-    <link href="assets/aos/aos.css" rel="stylesheet">
-  </head>
-  <body>
-<header>
-  <nav class="navbar navbar-expand-md fixed-top bg-darks navbar-light">
-    <div id="logo" class="container-fluid">
-      <a href="https://darussalamah.ponpes.id" class="navbar-brand d-flex align-items-center px-2 px-lg-4 col-md-4 col-9">
-		<div class="col-md-12 col-xs-12 ps-2 ">
-		<img class="img-fluid pt-2 pb-2" src="ponpes.png">
-		</div>
-	  </a>
-	  
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-		<div class="collapse navbar-collapse" id="navbarCollapse">
-		<div class="navbar-nav ms-auto p-4 p-lg-0">
-		<a href="#syarat" class="nav-item nav-link ">Daftar</a>
-		<a href="#syarat" class="nav-item nav-link ">Persyaratan</a>
-		<a href="#agenda" class="nav-item nav-link ">Agenda</a>
-		<a href="#biaya" class="nav-item nav-link ">Biaya</a>
-		<a href="#brosur" class="nav-item nav-link ">Brosur</a>
-		<a href="#kontak" class="nav-item nav-link ">Kontak</a>
-		</div>
-		</div>
+/*
+ *---------------------------------------------------------------
+ * ERROR REPORTING
+ *---------------------------------------------------------------
+ *
+ * Different environments will require different levels of error reporting.
+ * By default development will show errors but testing and live will hide them.
+ */
+switch (ENVIRONMENT)
+{
+	case 'development':
+		error_reporting(-1);
+		ini_set('display_errors', 1);
+	break;
 
-    </div>
-  </nav>
-</header>
+	case 'testing':
+	case 'production':
+		ini_set('display_errors', 0);
+		if (version_compare(PHP_VERSION, '5.3', '>='))
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
+		}
+		else
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
+		}
+	break;
 
-<main>
+	default:
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'The application environment is not set correctly.';
+		exit(1); // EXIT_ERROR
+}
 
-<div class="container-fluid bg-ponpes py-4 page-header hide">
-	<div class="container py-5">
-		<div class="row justify-content-center">
-			<div class="col-lg-10 text-center">
-			<div class="carousel-caption-content p-3">
-				<h1 class="display text-capitalize text-white mb-4">PENERIMAAN SANTRI BARU (PSB)</h1>
-				<p class="mb-5 fs-5 text-white">Pendaftaran Santri Baru TP. 2025-2026 Telah Dibuka!! 
-				</p>
-				<a class="btn btn-success bg-ponpes text-white rounded-pill text-white py-3 px-5" href="#">Daftar Sekarang</a>
-			</div>
-			</div>
-		</div>
-	</div>
-</div>
+/*
+ *---------------------------------------------------------------
+ * SYSTEM DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * This variable must contain the name of your "system" directory.
+ * Set the path if it is not in the same directory as this file.
+ */
+	$system_path = 'system';
 
-	<div id="syarat" class="container-fluid py-5 wow gray-bg fadeInUp" data-aos="fade-up">
-        <div class="container py-3 px-4">
-            <div class="row g-5">
-                <div class="col-lg-7 mb-3">
-                    <div class="section-title_left position-relative pb-3 mb-2">
-                        <h4 class="fw-bold text-ponpes text-uppercase">Pendaftaran Santri Baru</h4>
-                        <h1 class="mb-0">Pondok Pesantren Darussalamah</h1>
-                    </div>
-                    <p class="mb-4">Pendaftaran Santri Baru Tahun Pelajaran 2025/2026 sudah dibuka Pendaftaran bisa dilakukan secara Offline maupun Online.</p>
-					<p style="text-align: justify;"><strong>Melampirkan :</strong></p>
-                    <div class="row g-0 mb-3">
-                        <div class="col-sm-7 wow zoomIn" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: zoomIn;">
-                            <h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Print Out NISN (2 Lembar)</h5>
-                            <h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Fc Ijazah (5 lembar)</h5>
-							<h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Fc KTP ayah & Ibu (5 lembar)</h5>
-                            <h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Fc Akta Kelahiran (5 lembar)</h5>
-							<h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Materai 10.000 (5 lembar)</h5>
-                           
-                            
-                        </div>
-                        <div class="col-sm-5 wow zoomIn" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: zoomIn;">
-							<h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>1 Map Gobi</h5>
-                            <h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Fc Piagam (5 lembar)</h5>
-							<h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Fc KK (5 lembar)</h5>
-							<h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Fc PIP/PKH (5 lembar)</h5>
-                         	
-                       
-						</div>
-                    </div>
-                    <a href="#" class="btn btn-success bg-ponpes text-white py-3 px-5 mt-3 wow zoomIn" data-wow-delay="0.9s" style="visibility: visible; animation-delay: 0.9s; animation-name: zoomIn;">Daftar</a>
-                </div>
-                <div class="col-lg-5" style="min-height: 500px;">
-                    <div class="position-relative h-100">
-                        <a href="#"><img class="position-absolute w-100 h-100 rounded wow zoomIn brosur" data-wow-delay="0.9s" src="bosur_.jpg" style="visibility: visible; animation-delay: 0.9s; animation-name: zoomIn;"></a><a>
-                    </a></div><a>
-                </a></div><a>
-            </a></div><a>
-        </a></div><a>
-    </a></div>
+/*
+ *---------------------------------------------------------------
+ * APPLICATION DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * If you want this front controller to use a different "application"
+ * directory than the default one you can set its name here. The directory
+ * can also be renamed or relocated anywhere on your server. If you do,
+ * use an absolute (full) server path.
+ * For more info please see the user guide:
+ *
+ * https://codeigniter.com/userguide3/general/managing_apps.html
+ *
+ * NO TRAILING SLASH!
+ */
+	$application_folder = 'application';
 
-<div class="container marketing" id="agenda">
-<div class="container" data-aos="fade-up">
-<div class="row g-5 mb-5">
-<div class="text-center" data-aos="fade-up" data-aos-delay="50">
-<h3 class="section-title bg-white text-center text-merah px-3" style="">Agenda Daftar</h3>
-</div>
-</div>
-</div>
-    <!-- Three columns of text below the carousel -->
-    <!-- /.row -->
-	
-	<div class="container" data-aos="fade-up">
-	 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
-        <div class="col mbt-2" data-aos="zoom-in" data-aos-delay="100">
-          <div class="card shadow-sm">
-           <div class="card-body text-center">
-			<span class="ms-3 wow fadeInDown fst-italic"><i class="bx bxs-calendar me-1"></i></span>
-              <p class="card-text">04 Februari 2025 s/d 29 Maret 2025</p>
-              <p class="card-text">Gelombang 1</p>
-            </div>
-          </div>
-        </div>
-		<div class="col mbt-2" data-aos="zoom-in" data-aos-delay="100">
-          <div class="card shadow-sm">
-           <div class="card-body text-center">
-			<span class="ms-3 wow fadeInDown fst-italic"><i class="bx bxs-calendar me-1"></i></span>
-              <p class="card-text">07 April 2025 s/d 30 Juli 2025</p>
-              <p class="card-text">Gelombang 2</p>
-            </div>
-          </div>
-        </div>
-        </div>
-        </div>
-        </div>
-		
-		<div id="biaya" class="container-fluid py-2 wow gray-bg fadeInUp" data-wow-delay="0.1s" data-aos="fade-up">
-        <div class="container py-3 px-4">
-            <div class="row g-5">
-                <div class="col-lg-7">
-                    <div class="section-title_left position-relative pb-3 mb-2">
-                        <h4 class="fw-bold text-ponpes text-uppercase">Biaya Pendaftaran</h4>
-                        <h1 class="mb-0">Pondok Pesantren Darussalamah</h1>
-                    </div>
-                    <div class="row g-0 mb-3">
-                        <div class="col-sm-12 wow zoomIn" data-wow-delay="0.2s" data-aos="zoom-in">
-                            <h5 class="mb-3 fw-bold text-ponpes">Biaya Pesantren Santri Baru</h5>
-                            <h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Pendaftaran Pesantren : Rp. 300.000</h5>
-                            <h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Infak Pesantren : Rp. 1000.000</h5>
-                            <h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Seragam Pesantren : Rp. 250.000</h5>
-                            <h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Seragam Diniyah : Rp. 150.000</h5>
-                        </div>
-                        <div class="col-sm-12 wow zoomIn" data-wow-delay="0.4s" data-aos="zoom-in">
-							<h5 class="mb-3 fw-bold text-ponpes"></i>Biaya Madrasah MTS / MA</h5>
-                            <h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Infak Madrasah : Rp. 300.000</h5>
-                            <h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Seragam Madrasah : Rp. 350.000</h5>
-						</div>
-						<div class="col-sm-12 wow zoomIn" data-wow-delay="0.4s" data-aos="zoom-in">
-							<h5 class="mb-3 fw-bold text-ponpes"></i>Biaya Syariah/Bulanan/Juli 2025</h5>
-                            <h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Bulanan Pendidikan : Rp. 150.000</h5>
-                            <h5 class="mb-3"><i class="fa fa-check text-ponpes me-3"></i>Bulanan Makan : Rp. 400.000</h5>
-						</div>
-                    </div>
-                </div>
-                <div class="col-lg-5" style="min-height: 500px;" data-aos="fade-up">
-                    <div class="position-relative h-100">
-                        <a href="#"><img class="position-absolute w-100 h-100 rounded wow zoomIn brosur" data-wow-delay="0.9s" src="http://localhost/ponpes_mura/assets/img/brosur.PNG" style="visibility: visible; animation-delay: 0.9s; animation-name: zoomIn;"></a><a>
-                    </a></div><a>
-                </a></div><a>
-            </a></div><a>
-        </a></div><a>
-    </a></div>
-	
-<div id="brosur" class="container marketing">
-<div class="container" data-aos="fade-up">
-<div class="row g-5 mb-5">
-<div class="text-center" data-aos="fade-up" data-aos-delay="50">
-<h3 class="section-title bg-white text-center text-merah px-3" style="">Brosur</h3>
-</div>
-</div>
-</div>
-    <!-- Three columns of text below the carousel -->
-    <!-- /.row -->
-	<div class="container" data-aos="fade-up">
-	 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 g-3">
-        <div class="col mbt-2" data-aos="zoom-in" data-aos-delay="100">
-          <div class="card shadow-sm">
-           <div class="card-body text-center">
-			<img class="img-flui w-100 h-100 rounded wow zoomIn brosur" data-wow-delay="0.9s" src="brosur1.PNG" style="visibility: visible; animation-delay: 0.9s; animation-name: zoomIn;">
-            </div>
-          </div>
-        </div>
-		<div class="col mbt-2" data-aos="zoom-in" data-aos-delay="100">
-          <div class="card shadow-sm">
-           <div class="card-body text-center">
-			<img class="img-flui w-100 h-100 rounded wow zoomIn brosur" data-wow-delay="0.9s" src="brosur.PNG" style="visibility: visible; animation-delay: 0.9s; animation-name: zoomIn;">
-            </div>
-          </div>
-        </div>
-        </div>
-        </div>
-        </div>
-		
-	<div id="kontak" class="container-fluid py-2 wow gray-bg fadeInUp" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInUp;">
-        <div class="container py-2">
-            <div class="row ">
-                <div class="col-lg-6 wow slideInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: slideInUp;">
-                   <div class="col-lg-12">
-                    <div class="pb-5 d-flex align-items-center wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                        <div class="icn d-flex align-items-center justify-content-center rounded" style="width: 60px; height: 60px;">
-                            <i class="fab fa-whatsapp"></i>
-                        </div>
-                        <div class="ps-4">
-                            <h5 class="">Telepon :</h5>
-                            <a href="https://api.whatsapp.com/send/?phone=6282182700873" target="_blank"><h4 class="text-ponpes mb-0">0821-8270-0873</h4></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="pb-5 d-flex align-items-center wow fadeIn" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeIn;">
-                        <div class="icn d-flex align-items-center justify-content-center rounded" style="width: 60px; height: 60px;">
-                            <i class="fa fa-envelope-open"></i>
-                        </div>
-                        <div class="ps-4">
-                            <h5 class="">Email :</h5>
-                            <h4 class="text-ponpes mb-0">admin@darussalamah.ponpes.id</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="pb-6 d-flex align-items-center wow fadeIn" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeIn;">
-                        <div class="icn d-flex align-items-center justify-content-center rounded" style="width: 60px; height: 60px;">
-                            <i class="fa fa-map-marker-alt"></i>
-                        </div>
-                        <div class="ps-4">
-                            <h5 class="">Alamat :</h5>
-                            <h4 class="text-ponpes mb-0">Jl. Tapak Libok Desa Marga Sakti <br>Kec. Muara Kelingi Kab. Musi Rawas </h4>
-                        </div>
-                    </div>
-                </div> 
-				<div class="col-lg-12">
-                    <div class="pb-6 d-flex align-items-center wow fadeIn" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeIn;">
-                        <div class="ps-4">
-						<br><br>
-                         <div class="d-flex align-items-center">
-							<i class="fas fa-share fa-2x text-ponpes me-2"></i>
-							<a class="btn-square btn bg-ponpes text-white rounded-circle mx-1" href="https://web.facebook.com/darussalamah.mr" target="_blank"><i class="fab fa-facebook-f"></i></a>
-							<a class="btn-square btn bg-ponpes text-white rounded-circle mx-1" href="https://www.youtube.com/@darussalamahmusirawas" target="_blank"><i class="fab fa-youtube"></i></a>
-							<a class="btn-square btn bg-ponpes text-white rounded-circle mx-1" href="https://www.instagram.com/darussalamah_musi_rawas" target="_blank"><i class="fab fa-instagram"></i></a>
-							<a class="btn-square btn bg-ponpes text-white rounded-circle mx-1" href="https://www.tiktok.com/@darussalamahmusirawas" target="_blank"><i class="fab fa-tiktok"></i></a>
-						</div>
-						</div>
-                    </div>
-                </div>
-		
-                </div>
-                <div class="col-lg-5 wow slideInUp" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: slideInUp;">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.495790237439!2d103.22151667497035!3d-2.959841297016337!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e30614e0d7913d3%3A0xa9ba5c4d826206f6!2sPondok%20Pesantren%20Darussalamah%20Musi%20Rawas!5e0!3m2!1sid!2sid!4v1739428244177!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
-            </div>
-        </div>
-    </div>	
-	  </div>
-  </div><!-- /.container -->
-  <!-- FOOTER -->
-  <footer class="container-fluid bg-white" id="footer">
-  
-    <div class="container footer-bottom clearfix">
-      <div class="copyright">
-        © Copyright <script></script>2025 - <a href="#" title="">Pondok Pesantren Darussalamah</a>
-      </div>  
-    </div>
-  </footer>
-</main>
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  
-  <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+/*
+ *---------------------------------------------------------------
+ * VIEW DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * If you want to move the view directory out of the application
+ * directory, set the path to it here. The directory can be renamed
+ * and relocated anywhere on your server. If blank, it will default
+ * to the standard location inside your application directory.
+ * If you do move this, use an absolute (full) server path.
+ *
+ * NO TRAILING SLASH!
+ */
+	$view_folder = '';
 
 
-  <script src="assets/js/main.js"></script>
+/*
+ * --------------------------------------------------------------------
+ * DEFAULT CONTROLLER
+ * --------------------------------------------------------------------
+ *
+ * Normally you will set your default controller in the routes.php file.
+ * You can, however, force a custom routing by hard-coding a
+ * specific controller class/function here. For most applications, you
+ * WILL NOT set your routing here, but it's an option for those
+ * special instances where you might want to override the standard
+ * routing in a specific front controller that shares a common CI installation.
+ *
+ * IMPORTANT: If you set the routing here, NO OTHER controller will be
+ * callable. In essence, this preference limits your application to ONE
+ * specific controller. Leave the function name blank if you need
+ * to call functions dynamically via the URI.
+ *
+ * Un-comment the $routing array below to use this feature
+ */
+	// The directory name, relative to the "controllers" directory.  Leave blank
+	// if your controller is not in a sub-directory within the "controllers" one
+	// $routing['directory'] = '';
 
-    </body>
-</html>
+	// The controller class file name.  Example:  mycontroller
+	// $routing['controller'] = '';
+
+	// The controller function you wish to be called.
+	// $routing['function']	= '';
+
+
+/*
+ * -------------------------------------------------------------------
+ *  CUSTOM CONFIG VALUES
+ * -------------------------------------------------------------------
+ *
+ * The $assign_to_config array below will be passed dynamically to the
+ * config class when initialized. This allows you to set custom config
+ * items or override any default config values found in the config.php file.
+ * This can be handy as it permits you to share one application between
+ * multiple front controller files, with each file containing different
+ * config values.
+ *
+ * Un-comment the $assign_to_config array below to use this feature
+ */
+	// $assign_to_config['name_of_config_item'] = 'value of config item';
+
+
+
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// --------------------------------------------------------------------
+
+/*
+ * ---------------------------------------------------------------
+ *  Resolve the system path for increased reliability
+ * ---------------------------------------------------------------
+ */
+
+	// Set the current directory correctly for CLI requests
+	if (defined('STDIN'))
+	{
+		chdir(dirname(__FILE__));
+	}
+
+	if (($_temp = realpath($system_path)) !== FALSE)
+	{
+		$system_path = $_temp.DIRECTORY_SEPARATOR;
+	}
+	else
+	{
+		// Ensure there's a trailing slash
+		$system_path = strtr(
+			rtrim($system_path, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		).DIRECTORY_SEPARATOR;
+	}
+
+	// Is the system path correct?
+	if ( ! is_dir($system_path))
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: '.pathinfo(__FILE__, PATHINFO_BASENAME);
+		exit(3); // EXIT_CONFIG
+	}
+
+/*
+ * -------------------------------------------------------------------
+ *  Now that we know the path, set the main path constants
+ * -------------------------------------------------------------------
+ */
+	// The name of THIS file
+	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
+
+	// Path to the system directory
+	define('BASEPATH', $system_path);
+
+	// Path to the front controller (this file) directory
+	define('FCPATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
+
+	// Name of the "system" directory
+	define('SYSDIR', basename(BASEPATH));
+
+	// The path to the "application" directory
+	if (is_dir($application_folder))
+	{
+		if (($_temp = realpath($application_folder)) !== FALSE)
+		{
+			$application_folder = $_temp;
+		}
+		else
+		{
+			$application_folder = strtr(
+				rtrim($application_folder, '/\\'),
+				'/\\',
+				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+			);
+		}
+	}
+	elseif (is_dir(BASEPATH.$application_folder.DIRECTORY_SEPARATOR))
+	{
+		$application_folder = BASEPATH.strtr(
+			trim($application_folder, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		);
+	}
+	else
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+		exit(3); // EXIT_CONFIG
+	}
+
+	define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
+
+	// The path to the "views" directory
+	if ( ! isset($view_folder[0]) && is_dir(APPPATH.'views'.DIRECTORY_SEPARATOR))
+	{
+		$view_folder = APPPATH.'views';
+	}
+	elseif (is_dir($view_folder))
+	{
+		if (($_temp = realpath($view_folder)) !== FALSE)
+		{
+			$view_folder = $_temp;
+		}
+		else
+		{
+			$view_folder = strtr(
+				rtrim($view_folder, '/\\'),
+				'/\\',
+				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+			);
+		}
+	}
+	elseif (is_dir(APPPATH.$view_folder.DIRECTORY_SEPARATOR))
+	{
+		$view_folder = APPPATH.strtr(
+			trim($view_folder, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		);
+	}
+	else
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+		exit(3); // EXIT_CONFIG
+	}
+
+	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ */
+require_once BASEPATH.'core/CodeIgniter.php';

@@ -1,0 +1,221 @@
+:root {
+  --ponpes: #127d69;
+}
+
+.blog-info {
+  padding: 10px 0px;
+}
+.blog-body {
+  padding: 5px 0px 30px;
+}
+.bl-title {
+  font-size: 19px;
+  margin-bottom: 4px;
+}
+
+.img-fluid {
+height: 30vh;
+}
+.section-title_left::after {
+  position: absolute;
+  content: "";
+  width: 6px;
+  height: 5px;
+  bottom: 0px;
+  background: #FFFFFF;
+  -webkit-animation: section-title-run 5s infinite linear;
+  animation: section-title-run 5s infinite linear;
+}
+.section-title_left::before {
+  position: absolute;
+  content: "";
+  width: 150px;
+  height: 5px;
+  left: 0;
+  bottom: 0;
+  border-radius: 2px;
+}
+h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+	font-family: "Nunito",sans-serif;
+}
+.fw-bold {
+  font-weight: 800 !important;
+}
+.section-title_left {
+  max-width: 900px;
+  text-align: left;
+  margin: 0 auto;
+    margin-bottom: 0px;
+}
+.hidden-xs{
+display:none
+}
+.img-flui {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px 8px 8px 8px;
+}
+.video{
+	width:560px; 
+	height:315px;
+}
+.eskul {
+  font-family: "Poppins", Sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  fill: #FFFFFF;
+  color: #FFFFFF;
+  border-radius: 10px 0px 10px 0px;
+ box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  padding: 9px 10px 7px 16px;
+  background-color: var(--ponpes);
+  margin: 16px;
+}
+.title_content {
+  font-size: 16px;
+  font-weight: 600;
+}
+.text-ponpes{
+	color: var(--ponpes);
+}
+btn.btn-success:hover {
+  box-shadow: inset 300px 0 0 0 var(--bs-light) !important;
+  color: var(--ponpes) !important;
+}
+.btn-success:hover {
+  color: #000;
+  background-color: var(--ponpes) !important;
+  border-color: var(--ponpes) !important;
+}
+
+.bg-ponpes {
+  background-color: var(--ponpes) !important;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: var(--ponpes) !important;
+  border-color: var(--ponpes) !important;
+}
+.m-1{
+	margin: 12px;
+}
+.gray-bg {
+  background-color: #f1f9f6;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.owl-nav .owl-prev, .owl-nav .owl-next {
+    display: none;
+  }
+.wo {
+	padding-right: 0px;
+}
+  .navbar-light {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    z-index: 999;
+  }
+ .pxr-3 {
+  padding-right: 1rem !important;
+  padding-left: 0rem !important;
+}
+  .py-5o {
+  padding-top: 4rem !important;
+  padding-bottom: 1rem !important;
+}
+.text-align{
+text-align: justify;
+}
+.dropdown-item:hover {
+  background-color: var(--ponpes) !important;
+}
+.w-40 {
+  width: 30% !important;
+}
+
+input::placeholder, textarea::placeholder {
+  opacity: 1;
+  color: #9ca3af;
+}
+input::placeholder, textarea::placeholder {
+  opacity: 1;
+  color: #9ca3af;
+}
+element {
+}
+.form-input {
+  padding-left: .75rem;
+  padding-right: .75rem;
+  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+  transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+  transition-duration: 150ms;
+  transition-duration: .2s;
+}
+.form-input {
+  border-radius: .25rem;
+  border-width: 1px;
+  height: 2.25rem;
+}
+.form-input {
+  --tw-border-opacity: 1;
+  border-color: rgba(209,213,219,var(--tw-border-opacity));
+}
+ .flex {
+    display: flex;
+  }
+  .flex_in {
+    display: flex;
+  }
+  .w-full {
+  width: 100%;
+}
+.space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(.75rem * var(--tw-space-y-reverse));
+}
+.form-check {
+  display: block;
+  min-height: 1.5rem;
+  padding-left: 0rem;
+  margin-bottom: .125rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.font-bold {
+  font-weight: 700;
+}
+.grey{
+	background-color: #f7f7f7;
+}
+.title {
+  overflow: hidden;
+  border-bottom: none;
+  color: var(--cl-main);
+  margin-top: 10px;
+  margin-bottom: 5px;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+}
+.d_berita {
+  height: 72px;
+  max-height: 72px;
+}
+
+.title_berita {
+  height: 45px;
+  max-height: 45px;
+}
+.img-fl {
+height: 30vh;
+}
